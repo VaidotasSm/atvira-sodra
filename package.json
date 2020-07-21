@@ -1,0 +1,50 @@
+{
+  "name": "atvira-sodra",
+  "version": "0.1.0",
+  "description": "atvira.sodra.lt API wrapper and tools",
+  "keywords": [
+    "sodra",
+    "API",
+    "viesi duomenys",
+    "LT",
+    "Lithuania"
+  ],
+  "homepage": "https://github.com/VaidotasSm/node-ts-starter#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VaidotasSm/node-ts-starter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/VaidotasSm/node-ts-starter/issues"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*"
+  ],
+  "scripts": {
+    "lint": "eslint src --ext .ts",
+    "test": "npx jest",
+    "test:watch": "jest --watchAll",
+    "prebuild": "npm run lint",
+    "build": "tsc",
+    "prepublishOnly": "npm run lint && npm test"
+  },
+  "author": "vaidotas.sm",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^26.0.4",
+    "@typescript-eslint/eslint-plugin": "^3.6.1",
+    "@typescript-eslint/parser": "^3.6.1",
+    "eslint": "^7.4.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "jest": "^26.1.0",
+    "ts-jest": "^26.1.3",
+    "typescript": "^3.9.7"
+  },
+  "dependencies": {
+    "@types/node-fetch": "^2.5.7",
+    "node-fetch": "^2.6.0"
+  }
+}
