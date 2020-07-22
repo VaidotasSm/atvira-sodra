@@ -30,6 +30,27 @@ export interface CompaniesResponse {
   totalPages: number;
 }
 
+export interface CompaniesHistoryResponse {
+  content: CompaniesHistoryResponseContent[];
+  last: boolean;
+  totalPages: number;
+  totalElements: number;
+  first: boolean;
+  sort: [
+    {
+      direction: 'ASC' | 'DESC';
+      property: string;
+      ignoreCase: boolean;
+      nullHandling: string;
+      descending: boolean;
+      ascending: boolean;
+    }
+  ];
+  numberOfElements: number;
+  size: number;
+  number: number;
+}
+
 export interface CompanyResponseContent {
   code: number;
   evrk: any;
@@ -47,6 +68,23 @@ export interface CompanyResponseContent {
   shortname: string;
 }
 
+export interface CompaniesHistoryResponseContent {
+  lookupId: number;
+  code: number;
+  jarCode: string;
+  name: string;
+  shortname: string;
+  month: number;
+  avgWage: number | null;
+  avgWage2: number | null;
+  numInsured: number;
+  numInsured2: number;
+  tax: number | null;
+  ecoActName: string;
+  ecoActCode: number;
+  municipality: string;
+}
+
 export interface SearchCompaniesParams {
   text?: string;
   minAvgWage?: number;
@@ -57,6 +95,14 @@ export interface SearchCompaniesParams {
   evrk?: string;
   start?: number;
   size?: number;
+}
+
+export interface SearchCompaniesHistoryParams {
+  dc?: number;
+  codes?: number;
+  start?: number;
+  size?: number;
+  sort?: string;
 }
 
 export interface SearchCompaniesOptions {
