@@ -9,13 +9,13 @@
     "LT",
     "Lithuania"
   ],
-  "homepage": "https://github.com/VaidotasSm/node-ts-starter#readme",
+  "homepage": "https://github.com/VaidotasSm/atvira-sodra#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/VaidotasSm/node-ts-starter.git"
+    "url": "git+https://github.com/VaidotasSm/atvira-sodra.git"
   },
   "bugs": {
-    "url": "https://github.com/VaidotasSm/node-ts-starter/issues"
+    "url": "https://github.com/VaidotasSm/atvira-sodra/issues"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -44,7 +44,11 @@
     "typescript": "^3.9.7"
   },
   "dependencies": {
+    "@types/event-stream": "^3.3.34",
     "@types/node-fetch": "^2.5.7",
+    "event-stream": "^4.0.1",
+    "get-line": "^0.1.2",
+    "json-2-csv": "^3.7.6",
     "node-fetch": "^2.6.0"
   }
 }
