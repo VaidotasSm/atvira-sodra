@@ -3,18 +3,14 @@ module.exports = {
     browser: true,
     commonjs: true,
     es2020: true,
-    "jest": true,
+    jest: true,
   },
-  extends: [
-    'airbnb-base',
-  ],
+  extends: ['airbnb-base'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    project: './tsconfig.json'  // TS config
+    project: './tsconfig.json', // TS config
   },
-  plugins: [
-    '@typescript-eslint',
-  ],
+  plugins: ['@typescript-eslint'],
   rules: {
     'import/no-unresolved': 0,
     'import/extensions': 0,
@@ -27,5 +23,7 @@ module.exports = {
     'import/prefer-default-export': 0,
     'implicit-arrow-linebreak': 0,
     'function-paren-newline': 0,
+    'no-restricted-syntax': 0,
+    'no-await-in-loop': 0,
   },
 };

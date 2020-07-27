@@ -1,15 +1,18 @@
 /* eslint-disable no-unused-vars */
 import fetch from 'node-fetch';
+import { SearchCompanyHistoryByFieldParams, SearchCompanyHistoryByFieldResponse } from './companies.api.types';
 import type {
   CompaniesResponse,
   SearchCompaniesOptions,
   SearchCompaniesParams,
-  SearchCompaniesHistoryParams,
-  CompaniesHistoryResponse,
+  SearchCompanyHistoryFullParams,
+  CompaniesHistoryFullResponse,
 } from './companies.api.types';
 
-const SODRA_API = 'https://atvira.sodra.lt/imones-rest/solr/page';
-const SODRA_API_MONTHLY = 'https://atvira.sodra.lt/imones-rest/values/monthly/page';
+const SODRA_API_BASE = 'https://atvira.sodra.lt';
+const SODRA_API = `${SODRA_API_BASE}/imones-rest/solr/page`;
+const SODRA_API_MONTHLY_FULL = `${SODRA_API_BASE}/imones-rest/values/monthly/page`;
+const SODRA_API_MONTHLY_FIELD = `${SODRA_API_BASE}/imones-rest/charts/measure/values/list`;
 
 /**
  * Search for companies within Open Sodra database
@@ -46,17 +49,41 @@ export async function searchCompanies(
  * @param {object} params - search parameters
  * @param {object} options - additional options
  */
-export async function searchCompaniesHistoricalData(
-  params: SearchCompaniesHistoryParams,
-  options: SearchCompaniesOptions
-): Promise<CompaniesHistoryResponse> {
-  const qs = (Object.keys(params) as Array<keyof SearchCompaniesHistoryParams>)
+export async function searchCompanyHistoryFull(
+  params: SearchCompanyHistoryFullParams = {},
+  options: SearchCompaniesOptions = {}
+): Promise<CompaniesHistoryFullResponse> {
+  const qs = (Object.keys(params) as Array<keyof SearchCompanyHistoryFullParams>)
+    .map((key) => {
+      if (key === 'sort') {
+        return (params.sort || []).map((sort) => `sort=${sort.field},${sort.desc ? 'DESC' : 'ASC'}`).join('&');
+      }
+      return `${key}=${params[key]}`;
+    })
+    .join('&');
+
+  const fullUrl = `${SODRA_API_MONTHLY_FULL}?${qs}`;
+  const res = await wrapGetRequest(options, fullUrl);
+  return res.body as CompaniesHistoryFullResponse;
+}
+
+/**
+ * Fetch Historical data for companies
+ *
+ * @param {object} params - search parameters
+ * @param {object} options - additional options
+ */
+export async function searchCompanyHistoryByField(
+  params: SearchCompanyHistoryByFieldParams,
+  options: SearchCompaniesOptions = {}
+): Promise<SearchCompanyHistoryByFieldResponse> {
+  const qs = (Object.keys(params) as Array<keyof SearchCompanyHistoryByFieldParams>)
     .map((key) => `${key}=${params[key]}`)
     .join('&');
 
-  const fullUrl = `${SODRA_API_MONTHLY}?${qs}`;
+  const fullUrl = `${SODRA_API_MONTHLY_FIELD}?${qs}`;
   const res = await wrapGetRequest(options, fullUrl);
-  return res.body as CompaniesHistoryResponse;
+  return res.body as SearchCompanyHistoryByFieldResponse;
 }
 
 async function wrapGetRequest(options: SearchCompaniesOptions, fullUrl: string) {

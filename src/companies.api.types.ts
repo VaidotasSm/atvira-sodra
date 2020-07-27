@@ -30,27 +30,6 @@ export interface CompaniesResponse {
   totalPages: number;
 }
 
-export interface CompaniesHistoryResponse {
-  content: CompaniesHistoryResponseContent[];
-  last: boolean;
-  totalPages: number;
-  totalElements: number;
-  first: boolean;
-  sort: [
-    {
-      direction: 'ASC' | 'DESC';
-      property: string;
-      ignoreCase: boolean;
-      nullHandling: string;
-      descending: boolean;
-      ascending: boolean;
-    }
-  ];
-  numberOfElements: number;
-  size: number;
-  number: number;
-}
-
 export interface CompanyResponseContent {
   code: number;
   evrk: any;
@@ -97,13 +76,57 @@ export interface SearchCompaniesParams {
   size?: number;
 }
 
-export interface SearchCompaniesHistoryParams {
+export interface SearchCompanyHistoryFullParams {
   dc?: number;
   codes?: number;
   start?: number;
   size?: number;
-  sort?: string;
+  sort?: SortParam[];
 }
+
+export interface CompaniesHistoryFullResponse {
+  content: CompaniesHistoryResponseContent[];
+  last: boolean;
+  totalPages: number;
+  totalElements: number;
+  first: boolean;
+  sort: [
+    {
+      direction: 'ASC' | 'DESC';
+      property: string;
+      ignoreCase: boolean;
+      nullHandling: string;
+      descending: boolean;
+      ascending: boolean;
+    }
+  ];
+  numberOfElements: number;
+  size: number;
+  number: number;
+}
+
+// month,desc
+export interface SortParam {
+  field: string;
+  desc?: boolean;
+}
+
+export interface SearchCompanyHistoryByFieldParams {
+  dc?: number;
+  measureCode: MeasureCode;
+  codes: number;
+  monthFrom: string;
+  monthTo: string;
+}
+
+export enum MeasureCode {
+  // eslint-disable-next-line no-unused-vars
+  AVG_WAGE = 'AVG_WAGE',
+  // eslint-disable-next-line no-unused-vars
+  NUM_INSURED = 'NUM_INSURED',
+}
+
+export type SearchCompanyHistoryByFieldResponse = { time: string; val1?: any }[];
 
 export interface SearchCompaniesOptions {
   makeGetRequest?: (fullUrl: string) => Promise<{ status: number; body: object }>;

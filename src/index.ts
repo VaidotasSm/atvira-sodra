@@ -1,20 +1,21 @@
 import { searchCompanies } from './companies.api';
-import type {
-  CompaniesResponse,
-  CompanyResponseContent,
-  SearchCompaniesOptions,
-  SearchCompaniesParams,
-} from './companies.api.types';
 import { parseCompaniesCsv } from './companies.parser';
 import type { CompanyParseContent } from './companies.parser';
+import { fetchCompaniesHistory, fromJarCodesToCodes } from './companies.scripts';
 
-export type { CompaniesResponse, CompanyResponseContent, SearchCompaniesParams, SearchCompaniesOptions };
+export * from './companies.api.types';
+
 const CompaniesAPI = {
   searchCompanies,
+};
+
+const CompaniesScripts = {
+  fetchCompaniesHistory,
+  fromJarCodesToCodes,
 };
 
 export type { CompanyParseContent };
 const CompaniesParser = {
   parseCompaniesCsv,
 };
-export { CompaniesAPI, CompaniesParser };
+export { CompaniesAPI, CompaniesParser, CompaniesScripts };
