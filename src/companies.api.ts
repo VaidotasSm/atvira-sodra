@@ -35,7 +35,12 @@ export async function searchCompanies(
   options: SearchCompaniesOptions = {}
 ): Promise<CompaniesResponse> {
   const qs = (Object.keys(params) as Array<keyof SearchCompaniesParams>)
-    .map((key) => `${key}=${params[key]}`)
+    .map((key) => {
+      if (key === 'sort') {
+        return (params.sort || []).map((sort) => `sort=${sort.field},${sort.desc ? 'DESC' : 'ASC'}`).join('&');
+      }
+      return `${key}=${params[key]}`;
+    })
     .join('&');
 
   const fullUrl = `${SODRA_API}?${qs}`;

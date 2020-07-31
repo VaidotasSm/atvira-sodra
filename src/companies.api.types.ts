@@ -74,6 +74,7 @@ export interface SearchCompaniesParams {
   evrk?: string;
   start?: number;
   size?: number;
+  sort?: SortParam[];
 }
 
 export interface SearchCompanyHistoryFullParams {
