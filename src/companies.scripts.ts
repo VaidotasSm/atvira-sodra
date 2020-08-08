@@ -2,7 +2,15 @@
 import { searchCompanyHistoryFull, searchCompanies } from './companies.api';
 import { CompaniesHistoryResponseContent } from './companies.api.types';
 
-type FetchCompaniesHistoryResults = { [key: number]: CompaniesHistoryResponseContent[] };
+// type FetchCompaniesHistoryResults = { [key: number]: CompaniesHistoryResponseContent[] };
+export interface FetchCompaniesHistoryResults {
+  [key: number]: CompanyHistoryRecord;
+}
+
+export interface CompanyHistoryRecord {
+  history: CompaniesHistoryResponseContent[];
+  totalElements: number;
+}
 
 export async function fetchCompaniesHistory(
   codes: number[],
@@ -21,7 +29,10 @@ export async function fetchCompaniesHistory(
       start: 0,
     });
 
-    results[code] = res.content;
+    results[code] = {
+      history: res.content,
+      totalElements: res.totalElements,
+    };
   }
 
   return results;

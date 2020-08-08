@@ -1,7 +1,12 @@
 import { searchCompanies } from './companies.api';
 import { parseCompaniesCsv } from './companies.parser';
 import type { CompanyParseContent } from './companies.parser';
-import { fetchCompaniesHistory, fromJarCodesToCodes } from './companies.scripts';
+import {
+  fetchCompaniesHistory,
+  fromJarCodesToCodes,
+  FetchCompaniesHistoryResults,
+  CompanyHistoryRecord,
+} from './companies.scripts';
 
 export * from './companies.api.types';
 
@@ -14,7 +19,7 @@ const CompaniesScripts = {
   fromJarCodesToCodes,
 };
 
-export type { CompanyParseContent };
+export type { CompanyParseContent, FetchCompaniesHistoryResults, CompanyHistoryRecord };
 const CompaniesParser = {
   parseCompaniesCsv,
 };
