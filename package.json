@@ -1,6 +1,6 @@
 {
   "name": "atvira-sodra",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "atvira.sodra.lt API wrapper and tools",
   "keywords": [
     "sodra",
@@ -26,9 +26,9 @@
     "lint": "eslint src --ext .ts",
     "test": "npx jest",
     "test:watch": "jest --watchAll",
-    "prebuild": "npm run lint",
     "build": "tsc",
-    "prepublishOnly": "npm run lint && npm test"
+    "check": "npm run lint && npm test",
+    "prepublishOnly": "npm run check && npm run build"
   },
   "author": "vaidotas.sm",
   "license": "MIT",
